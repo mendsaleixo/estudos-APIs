@@ -5,37 +5,3 @@ body {
 h1 {
   text-align: center;
 }
-#form-tarefa {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-#input-tarefa {
-  width: 300px;
-  padding: 8px;
-}
-#lista-tarefas {
-  list-style-type: none;
-  padding: 0;
-  max-width: 400px;
-  margin: auto;
-}
-li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #fff;
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-}
-li.completa {
-  text-decoration: line-through;
-  color: #888;
-}
-.delete-btn {
-  background: #ff4d4d;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-}
