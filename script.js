@@ -9,7 +9,7 @@ async function buscarTarefas() {
       throw new Error("Não foi possível buscar os dados da API.");
     }
     const tarefas = await response.json();
-    console.log(tarefas);
+    renderizarTarefas(tarefas);
   } catch (err) {
     console.error(`Erro: ${err}`);
   }
@@ -21,7 +21,12 @@ function renderizarTarefas(tarefas) {
     listaTarefasElement.innerHTML = "<p>Nenhuma tarefa cadastrada.</p>";
     return;
   }
-  tarefas.forEach((tarefa) => console.log(tarefa));
+  tarefas.forEach((tarefa) => {
+    const li = document.createElement("li");
+    li.textContent = tarefa.texto;
+    li.dataset.id = tarefa.id;
+    listaTarefasElement.appendChild(li);
+  });
 }
 
 document.addEventListener("DOMContentLoaded", buscarTarefas);
