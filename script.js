@@ -5,7 +5,9 @@ const inputTarefa = document.getElementById("input-tarefa");
 const buttonTarefa = document.getElementById("button-tarefa");
 const loadingMessage = document.getElementById("loading-message");
 
-formTarefa.addEventListener("submit", (event) => {event.preventDefault()})
+formTarefa.addEventListener("submit", (event) => {
+  event.preventDefault();
+});
 
 async function buscarTarefas() {
   try {
@@ -32,6 +34,25 @@ function renderizarTarefas(tarefas) {
     li.dataset.id = tarefa.id;
     listaTarefasElement.appendChild(li);
   });
+}
+
+async function adicionarTarefa(texto) {
+  try {
+    const novaTarefa = {
+      texto: texto,
+      completa: false,
+    };
+    const response = await fetch(apiUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(novaTarefa),
+    });
+    if (!response.ok) {
+      throw new Error("Não foi possível adicionar a tarefa.");
+    }
+  } catch (err) {
+    console.error(`Erro: ${err}`);
+  }
 }
 
 document.addEventListener("DOMContentLoaded", buscarTarefas);
