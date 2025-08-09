@@ -1,6 +1,11 @@
 const apiUrl = "https://689245cf447ff4f11fbfc668.mockapi.io/tarefas";
 const listaTarefasElement = document.getElementById("lista-tarefas");
+const formTarefa = document.getElementById("form-tarefa");
+const inputTarefa = document.getElementById("input-tarefa");
+const buttonTarefa = document.getElementById("button-tarefa");
 const loadingMessage = document.getElementById("loading-message");
+
+formTarefa.addEventListener("submit", (event) => {event.preventDefault()})
 
 async function buscarTarefas() {
   try {
