@@ -5,8 +5,20 @@ const inputTarefa = document.getElementById("input-tarefa");
 const buttonTarefa = document.getElementById("button-tarefa");
 const loadingMessage = document.getElementById("loading-message");
 
-formTarefa.addEventListener("submit", (event) => {
+formTarefa.addEventListener("submit", async (event) => {
   event.preventDefault();
+
+  const texto = inputTarefa.value.trim();
+  if (texto) {
+    console.log("Adicionando nova tarefa...");
+    await adicionarTarefa(texto);
+
+    console.log("Tarefa adicionada, atualizando a lista...");
+    buscarTarefas();
+
+    inputTarefa.value = "";
+    inputTarefa.focus();
+  }
 });
 
 async function buscarTarefas() {
