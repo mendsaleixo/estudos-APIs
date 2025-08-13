@@ -13,7 +13,7 @@ async function buscarTarefas() {
   try {
     const response = await fetch(apiUrl);
     if (!response.ok) {
-      throw new Error("Não foi possível buscar os dados da API.");
+      throw new Error("Não foi possível encontrar as tarefas.");
     }
     const tarefas = await response.json();
     renderizarTarefas(tarefas);
