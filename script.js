@@ -42,8 +42,17 @@ function renderizarTarefas(tarefas) {
   }
   tarefas.forEach((tarefa) => {
     const li = document.createElement("li");
-    li.textContent = tarefa.texto;
     li.dataset.id = tarefa.id;
+
+    const spanTexto = document.createElement("span");
+    spanTexto.textContent = tarefa.texto;
+    li.appendChild(spanTexto);
+
+    const button = document.createElement("button");
+    button.textContent = "Excluir";
+    button.className = "delete-btn";
+    li.appendChild(button);
+
     listaTarefasElement.appendChild(li);
   });
 }

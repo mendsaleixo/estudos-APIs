@@ -14,6 +14,7 @@
   --text-color: #e1e1e6;
   --text-secondary-color: #a8a8b3;
   --input-bg-color: #121214;
+  --delete-btn-main: #b998f8;
 }
 
 * {
@@ -113,4 +114,21 @@ ul p {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.delete-btn {
+  padding: 0.2rem 0.5rem;
+  margin: 0.5rem;
+  border: none;
+  border-radius: 2px;
+  background-color: var(--delete-btn-main);
+  font-weight: 500;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.delete-btn:hover {
+  background-color: var(--primary-hover-color);
+  transform: translateY(-2px);
 }
