@@ -22,13 +22,18 @@ formTarefa.addEventListener("submit", async (event) => {
 });
 
 listaTarefasElement.addEventListener("click", async (event) => {
-  if (event.target.classList.contains("delete-btn")) {
+  const target = event.target;
+  const li = target.closest("li");
+
+  if (!li) return;
+
+  const id = li.dataset.id;
+
+  if (target.classList.contains("delete-btn")) {
     const confirmou = window.confirm(
       "Tem certeza que deseja excluir esta tarefa?"
     );
     if (confirmou) {
-      const li = event.target.closest("li");
-      const id = li.dataset.id;
       try {
         console.log(`Excluindo tarefa com ID: ${id}`);
         await excluirTarefa(id);
@@ -39,6 +44,9 @@ listaTarefasElement.addEventListener("click", async (event) => {
         console.error(err);
       }
     }
+  } else if (target.type === "checkbox") {
+    const novoStatus = target.checked;
+    console.log(`Tarefa ID: ${id}, Novo Status: ${novoStatus}`);
   }
 });
 
