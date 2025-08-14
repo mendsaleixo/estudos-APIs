@@ -21,6 +21,14 @@ formTarefa.addEventListener("submit", async (event) => {
   }
 });
 
+listaTarefasElement.addEventListener("click", (event) => {
+  if (event.target.classList.contains("delete-btn")) {
+    const li = event.target.closest("li");
+    const id = li.dataset.id;
+    console.log("ID da tarefa a ser deletada:", id);
+  }
+});
+
 async function buscarTarefas() {
   try {
     const response = await fetch(apiUrl);
