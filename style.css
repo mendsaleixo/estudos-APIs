@@ -98,6 +98,16 @@ li {
   gap: 1rem;
 }
 
+li.completa span {
+  text-decoration: line-through;
+  color: var(--text-secondary-color); 
+}
+
+li span {
+  flex-grow: 1; 
+  margin-left: 1rem; 
+}
+
 li:last-child {
   border-bottom: none;
 }

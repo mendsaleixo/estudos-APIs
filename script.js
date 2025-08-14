@@ -42,6 +42,7 @@ listaTarefasElement.addEventListener("click", async (event) => {
   }
 });
 
+/* Buscando tarefa no servidor (READ) */
 async function buscarTarefas() {
   try {
     const response = await fetch(apiUrl);
@@ -65,6 +66,15 @@ function renderizarTarefas(tarefas) {
     const li = document.createElement("li");
     li.dataset.id = tarefa.id;
 
+    if (tarefa.completa) {
+      li.classList.add("completa");
+    }
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = tarefa.completa;
+    li.appendChild(checkbox);
+
     const spanTexto = document.createElement("span");
     spanTexto.textContent = tarefa.texto;
     li.appendChild(spanTexto);
@@ -78,6 +88,7 @@ function renderizarTarefas(tarefas) {
   });
 }
 
+/* Criando tarefas (CREATE) */
 async function adicionarTarefa(texto) {
   try {
     const novaTarefa = {
@@ -97,6 +108,7 @@ async function adicionarTarefa(texto) {
   }
 }
 
+/* Apagando tarefa (DELETE) */
 async function excluirTarefa(id) {
   try {
     const response = await fetch(`${apiUrl}/${id}`, {
@@ -104,6 +116,22 @@ async function excluirTarefa(id) {
     });
     if (!response.ok) {
       throw new Error("Não foi possível excluir essa tarefa.");
+    }
+  } catch (err) {
+    console.error(`Erro: ${err}`);
+  }
+}
+
+/*Atualizando tarefas (UPDATE) */
+async function atualizarTarefa(id, tarefaAtualizada) {
+  try {
+    const response = await fetch(`${apiUrl}/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(tarefaAtualizada),
+    });
+    if (!response.ok) {
+      throw new Error("Não foi possível atualizar essa tarefa.");
     }
   } catch (err) {
     console.error(`Erro: ${err}`);
