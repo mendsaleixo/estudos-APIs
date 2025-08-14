@@ -46,7 +46,22 @@ listaTarefasElement.addEventListener("click", async (event) => {
     }
   } else if (target.type === "checkbox") {
     const novoStatus = target.checked;
-    console.log(`Tarefa ID: ${id}, Novo Status: ${novoStatus}`);
+    const texto = li.querySelector("span").textContent;
+    const tarefaAtualizada = {
+      texto: texto,
+      completa: novoStatus,
+    };
+    try {
+      li.classList.toggle("completa", novoStatus);
+
+      await atualizarTarefa(id, tarefaAtualizada);
+      console.log("Tarefa atualizada com sucesso no servidor!");
+    } catch (err) {
+      alert("Não foi possível atualizar a tarefa. Tente novamente.");
+      li.classList.toggle("completa", !novoStatus);
+      target.checked = !novoStatus;
+      console.error(err);
+    }
   }
 });
 
@@ -78,14 +93,18 @@ function renderizarTarefas(tarefas) {
       li.classList.add("completa");
     }
 
+    const taskContent = document.createElement("div");
+    taskContent.className = "task-content";
+
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.checked = tarefa.completa;
-    li.appendChild(checkbox);
+    taskContent.appendChild(checkbox);
 
     const spanTexto = document.createElement("span");
     spanTexto.textContent = tarefa.texto;
-    li.appendChild(spanTexto);
+    taskContent.appendChild(spanTexto);
+    li.appendChild(taskContent);
 
     const button = document.createElement("button");
     button.textContent = "Excluir";

@@ -15,6 +15,7 @@
   --text-secondary-color: #a8a8b3;
   --input-bg-color: #121214;
   --delete-btn-main: #b998f8;
+  --text-color-complete: #5b5b5d;
 }
 
 * {
@@ -56,7 +57,7 @@ form {
   margin-bottom: 1.5rem;
 }
 
-input {
+input#input-tarefa {
   flex-grow: 1;
   padding: 0.8rem;
   border-radius: 6px;
@@ -92,20 +93,22 @@ li {
   border-bottom: 1px solid var(--border-color);
   animation: fadeIn 0.5s ease;
   color: var(--text-secondary-color);
+
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
 }
 
-li.completa span {
-  text-decoration: line-through;
-  color: var(--text-secondary-color); 
+.task-content {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
 }
 
-li span {
-  flex-grow: 1; 
-  margin-left: 1rem; 
+li.completa span {
+  text-decoration: line-through;
+  color: var(--text-color-complete);
 }
 
 li:last-child {
@@ -113,10 +116,48 @@ li:last-child {
 }
 
 ul p {
-  /* Estilo para a mensagem de "nenhuma tarefa" */
   text-align: center;
   color: var(--text-secondary-color);
   padding: 1rem;
+}
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  margin: 0;
+  font: inherit;
+  width: 1em; 
+  height: 1em;
+  border: 2px solid var(--border-color);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  display: grid;
+  place-content: center;
+  flex-shrink: 0;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+   box-shadow: inset 1em 1em white;
+
+  transform-origin: bottom left;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+/* Estilo para QUANDO o checkbox estiver MARCADO */
+input[type="checkbox"]:checked {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
 }
 
 @keyframes fadeIn {
@@ -133,7 +174,7 @@ ul p {
 .delete-btn {
   background: transparent;
   border: none;
-  padding: 0.2rem 0.4rem; /* Um padding sutil */
+  padding: 0.2rem 0.4rem; 
   border-radius: 4px;
   cursor: pointer;
   color: var(--text-secondary-color);
