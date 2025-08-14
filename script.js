@@ -84,4 +84,17 @@ async function adicionarTarefa(texto) {
   }
 }
 
+async function excluirTarefa(id) {
+  try {
+    const response = await fetch(`${apiUrl}/${id}`, {
+      method: "DELETE",
+    });
+    if (!response.ok) {
+      throw new Error("Não foi possível excluir essa tarefa.");
+    }
+  } catch (err) {
+    console.error(`Erro: ${err}`);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", buscarTarefas);
