@@ -21,11 +21,24 @@ formTarefa.addEventListener("submit", async (event) => {
   }
 });
 
-listaTarefasElement.addEventListener("click", (event) => {
+listaTarefasElement.addEventListener("click", async (event) => {
   if (event.target.classList.contains("delete-btn")) {
-    const li = event.target.closest("li");
-    const id = li.dataset.id;
-    console.log("ID da tarefa a ser deletada:", id);
+    const confirmou = window.confirm(
+      "Tem certeza que deseja excluir esta tarefa?"
+    );
+    if (confirmou) {
+      const li = event.target.closest("li");
+      const id = li.dataset.id;
+      try {
+        console.log(`Excluindo tarefa com ID: ${id}`);
+        await excluirTarefa(id);
+        console.log("Tarefa excluída, atualizando a lista...");
+        buscarTarefas();
+      } catch (err) {
+        alert("Não foi possível excluir a tarefa.");
+        console.error(err);
+      }
+    }
   }
 });
 
