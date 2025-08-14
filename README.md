@@ -1,6 +1,6 @@
 # To-Do List com API (Vanilla JS)
 
-![Screenshot da Tela da Aplicação](/todolist.png)
+![Screenshot da Tela da Aplicação](/todolist-img.png)
 
 ## Objetivo do Projeto
 
